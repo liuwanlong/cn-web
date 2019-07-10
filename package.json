@@ -1,0 +1,29 @@
+{
+  "name": "nextjs",
+  "version": "4.0.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "@material-ui/styles": "latest",
+    "axios": "^0.18.0",
+    "express": "^4.16.4",
+    "http-proxy-middleware": "^0.19.1",
+    "mobx": "^5.9.4",
+    "mobx-react": "^5.4.3",
+    "clsx": "latest",
+    "next": "latest",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "scripts": {
+    "dev": "node server/server.js",
+    "production": "next build && NODE_ENV=production PORT=8090 node server/server.js",
+    "build": "next build",
+    "start": "npm2 start server/server.js --name='cn-web'"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.4.0",
+    "babel-plugin-transform-class-properties": "^6.24.1"
+  }
+}
