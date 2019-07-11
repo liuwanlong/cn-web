@@ -2,8 +2,8 @@ import React from 'react';
 import { inject, observer } from 'mobx-react'
 import { withStyles } from '@material-ui/styles';
 import PropTypes from 'prop-types';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Grey from '@material-ui/core/colors/grey';
 
 
 
@@ -17,16 +17,37 @@ const styles = theme => {
       paddingRight: paddingUnit,
     },
     root: {
-      padding: paddingUnit,
-      margin: '0.5rem 0',
-      backgroundColor: theme.palette.background.paper,
+      padding: '1rem 0'
     },
     header: {
       extend: 'padding',
+      marginBottom: '1rem',
     },
     content: {
       extend: 'padding',
       textAlign: 'justify',
+      '& .article-summary': {
+        display: 'flex',
+        backgroundColor: Grey.A100,
+        padding: '0.5rem',
+        textJustify: 'justify'
+      },
+      '& .article-summary .topic': {
+        width: '15rem',
+        marginRight: '0.29rem'
+      },
+      '& .article-topic': {
+        display: 'none',
+
+      },
+      '& blockquote': {
+        backgroundColor: Grey["300"],
+        margin: '0',
+        padding: '0.5rem 2rem',
+      },
+      '& a': {
+        color: '#000',
+      },
       '& img': {
         display: 'block',
         width: 'auto',
@@ -52,12 +73,11 @@ class NewsDetail extends React.Component {
     const { detail } = homeStore;
 
     return (
-      <Paper className={classes.root}>
-        <Typography className={classes.header} variant="h5" component="h3"
-                    dangerouslySetInnerHTML={{ __html: detail.title }}/>
+      <div className={classes.root}>
+        <Typography className={classes.header} variant="h6" dangerouslySetInnerHTML={{ __html: detail.title }}/>
         <div className={classes.content} dangerouslySetInnerHTML={{ __html: `${detail.content}` }}/>
+      </div>
 
-      </Paper>
     )
   }
 }
