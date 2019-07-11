@@ -20,7 +20,7 @@ module.exports = {
       user : 'root',
       host : '154.8.169.156',
       ref  : 'origin/master',
-      repo : 'git@gitlab.com:liuwanlong/cn-web.git',
+      repo : 'git@github.com:liuwanlong/cn-web.git',
       path : '/home/www/cn-web/',
       'post-setup': 'yarn install && yarn next build && pm2 start ecosystem.config.js --env production',
       'post-deploy' : 'yarn install &&  yarn next build && pm2 reload ecosystem.config.js --env production',
