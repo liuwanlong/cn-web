@@ -12,6 +12,7 @@ import Grey from '@material-ui/core/colors/grey';
 import Zoom from '@material-ui/core/Zoom';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import BackToTop from "../common/BackToTop";
+import CompatibleDocument from '../../lib/utils/CompatibleDocument'
 
 
 const styles = theme => ({
@@ -52,8 +53,7 @@ class NewsIndex extends React.Component {
   componentDidMount() {
     const { homeStore } = this.props;
     document.addEventListener('scroll', () => {
-      let docEle = document.documentElement;
-      if (docEle.scrollHeight - docEle.clientHeight - docEle.scrollTop <= 0) {
+      if (CompatibleDocument.scrollHeight() - CompatibleDocument.clientHeight() - CompatibleDocument.scrollTop() <= 0) {
         this.setState({ touchedBottom: true });
         homeStore.fetchMoreNews(() => {
           this.setState({ touchedBottom: false });

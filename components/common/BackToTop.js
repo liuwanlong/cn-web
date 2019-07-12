@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/styles';
 import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom';
 import ArrowUp from '@material-ui/icons/KeyboardArrowUp';
+import CompatibleDocument from "../../lib/utils/CompatibleDocument";
 
 const useStyles = makeStyles(({
   root: {
@@ -19,23 +20,17 @@ export default function BackToTop(props) {
 
   useEffect(() => {
     document.addEventListener('scroll', (e) => {
-      const { top, height } = scroll();
+      let top = CompatibleDocument.scrollTop();
+      let height = CompatibleDocument.scrollTop();
       setDisplay(top / height >= 0.2)
     })
   });
 
-  function scroll() {
-    let docEle = document.documentElement;
-    return {
-      top: docEle.scrollTop,
-      height: docEle.scrollHeight
-    }
-  }
-
   function scrollToTop() {
-    let { top, height } = scroll();
-    top -= height / 10;
-    document.documentElement.scrollTop = top <= 0 ? 0 : top;
+    let top = CompatibleDocument.scrollTop();
+    let height = CompatibleDocument.scrollTop();
+    top -= height / 7;
+    CompatibleDocument.scrollToTop(top <= 0 ? 0 : top);
     if (top > 0) {
       window.requestAnimationFrame(scrollToTop);
     } else {
