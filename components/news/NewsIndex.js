@@ -53,7 +53,7 @@ class NewsIndex extends React.Component {
   componentDidMount() {
     const { homeStore } = this.props;
     document.addEventListener('scroll', () => {
-      if (CompatibleDocument.scrollHeight() - CompatibleDocument.clientHeight() - CompatibleDocument.scrollTop() <= 0) {
+      if (CompatibleDocument.scrollHeight() - CompatibleDocument.clientHeight() - CompatibleDocument.scrollTop() <= 50) {
         this.setState({ touchedBottom: true });
         homeStore.fetchMoreNews(() => {
           this.setState({ touchedBottom: false });
