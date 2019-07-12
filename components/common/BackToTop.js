@@ -19,7 +19,7 @@ export default function BackToTop(props) {
   const [display, setDisplay] = useState(false);
 
   useEffect(() => {
-    document.addEventListener('scroll', (e) => {
+    window.addEventListener('scroll', () => {
       let top = CompatibleDocument.scrollTop();
       let height = CompatibleDocument.scrollTop();
       setDisplay(top / height >= 0.2)
