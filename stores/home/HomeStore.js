@@ -3,7 +3,7 @@ import axios from '../../lib/axios';
 
 class HomeStore {
 
-  @observable text = "Hello Word!";
+  @observable isLoading = false;
   @observable news = [];
   @observable detail = {};
   @observable page = 1;
@@ -37,6 +37,7 @@ class HomeStore {
 
   fetchMoreNews = flow(function* (succeeded) {
     try {
+      this.isLoading = true;
       const response = yield axios.get('/articles', { params: { page: this.page + 1, pageSize: this.pageSize } });
       this.news = [].concat(this.news).concat(response.data.list);
       if (response.data.list.length) {
@@ -44,8 +45,10 @@ class HomeStore {
       } else {
         this.page = Number(response.data.page) - 1;
       }
+      this.isLoading = false;
       succeeded();
     } catch (error) {
+      this.isLoading = false;
       console.log(error);
     }
   });

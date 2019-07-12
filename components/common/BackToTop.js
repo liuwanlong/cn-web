@@ -18,13 +18,20 @@ export default function BackToTop(props) {
   const classes = useStyles();
   const [display, setDisplay] = useState(false);
 
+  // 返回一个函数，在unMount中执行，第二个参数为空数组，意为只在didMount中执行
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      let top = CompatibleDocument.scrollTop();
-      let height = CompatibleDocument.scrollTop();
-      setDisplay(top / height >= 0.2)
-    })
-  });
+    window.addEventListener('scroll', handleScrollDisplay);
+
+    return () => {
+      window.removeEventListener('scroll', handleScrollDisplay);
+    }
+  }, []);
+
+  function handleScrollDisplay() {
+    let top = CompatibleDocument.scrollTop();
+    let height = CompatibleDocument.scrollTop();
+    setDisplay(top / height >= 0.2)
+  }
 
   function scrollToTop() {
     let top = CompatibleDocument.scrollTop();

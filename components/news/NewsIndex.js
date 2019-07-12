@@ -51,22 +51,28 @@ class NewsIndex extends React.Component {
   };
 
   componentDidMount() {
-    const { homeStore } = this.props;
-    window.addEventListener('scroll', () => {
-      if (CompatibleDocument.scrollHeight() - CompatibleDocument.clientHeight() - CompatibleDocument.scrollTop() <= 0
-      ) {
-        this.setState({ touchedBottom: true });
-        homeStore.fetchMoreNews(() => {
-          this.setState({ touchedBottom: false });
-        });
-      }
-    })
+    window.addEventListener('scroll', this.handleScrollLoadMore);
   };
+
+  handleScrollLoadMore = () => {
+    const { homeStore } = this.props;
+    if (!homeStore.isLoading && CompatibleDocument.scrollHeight() - CompatibleDocument.clientHeight() - CompatibleDocument.scrollTop() <= 10
+    ) {
+      this.setState({ touchedBottom: true });
+      homeStore.fetchMoreNews(() => {
+        this.setState({ touchedBottom: false });
+      });
+    }
+  }
 
   handleToTopFinished = () => {
     const { homeStore } = this.props;
     homeStore.fetchNewsList();
   };
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScrollLoadMore);
+  }
 
   render() {
 
