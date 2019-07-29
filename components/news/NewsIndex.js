@@ -92,7 +92,8 @@ class NewsIndex extends React.Component {
               <React.Fragment key={sid}>
                 <ListItem component={'a'} href={`/articles/${sid}`} className={classes.listItem}>
                   <ListItemAvatar>
-                    <Avatar className={classes.listItemAvatar} src={`https://api.battleangel.online${thumb}`}/>
+                    {/*<Avatar className={classes.listItemAvatar} src={`https://api.battleangel.online${thumb}`}/>*/}
+                    <Avatar className={classes.listItemAvatar} src={`http://localhost:3001${thumb}`}/>
                   </ListItemAvatar>
                   <ListItemText
                     primary={<div dangerouslySetInnerHTML={{ __html: title }}/>}

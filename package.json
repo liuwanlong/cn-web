@@ -21,7 +21,7 @@
     "dev": "node server/server.js",
     "production": "next build && NODE_ENV=production PORT=8090 node server/server.js",
     "build": "next build",
-    "start": "npm2 start server/server.js --name='cn-web'"
+    "start": "NODE_ENV=production pm2 start server/server.js --name='cn-web'"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",

@@ -20,11 +20,13 @@ const server = express();
 app.prepare()
   .then(() => {
 
-    // 代理设置
-    server.use('/api', proxy({
-      target: API_URL,
-      changeOrigin: true,
-    }));
+    if (dev) {
+      // 代理设置
+      server.use('/api', proxy({
+        target: API_URL,
+        changeOrigin: true,
+      }));
+    }
 
     server.get('/articles/:sid', (req, res) => {
       let { sid } = req.params;
