@@ -14,7 +14,6 @@ module.exports = {
       PORT: 8080
     }
   }],
-
   deploy : {
     production : {
       user : 'root',
