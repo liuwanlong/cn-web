@@ -18,7 +18,6 @@ module.exports = {
   deploy : {
     production : {
       user : 'root',
-      ssh  : '~/tencent',
       host : '154.8.169.156',
       ref  : 'origin/master',
       repo : 'git@github.com:liuwanlong/cn-web.git',
