@@ -60,7 +60,7 @@ class NewsIndex extends React.Component {
   handleScrollLoadMore = () => {
     const { homeStore } = this.props;
     if (!this.state.touchedBottom && !homeStore.isLoading && CompatibleDocument.scrollHeight() - CompatibleDocument.clientHeight() -
-      CompatibleDocument.scrollTop() <= 10) {
+      CompatibleDocument.scrollTop() <= 30) {
       this.setState({ touchedBottom: true });
       homeStore.fetchMoreNews(() => {
         this.setState({ touchedBottom: false });
@@ -97,18 +97,7 @@ class NewsIndex extends React.Component {
                   </ListItemAvatar>
                   <ListItemText
                     primary={<div dangerouslySetInnerHTML={{ __html: title }}/>}
-                    secondary={
-                      <Box display="flex" flexDirection="row">
-                        <Box flexGrow={1}>
-                          {inputtime}
-                        </Box>
-                        <Chip
-                          size="small"
-                          label={label}
-                          color={Grey.A700}
-                        />
-                      </Box>
-                    }
+                    secondary={inputtime}
                   />
                 </ListItem>
                 <Divider variant="inset" component="li"/>
