@@ -29,14 +29,13 @@ export default function BackToTop(props) {
 
   function handleScrollDisplay() {
     let top = CompatibleDocument.scrollTop();
-    let height = CompatibleDocument.scrollTop();
-    setDisplay(top / height >= 0.2)
+    setDisplay(top >= 100)
   }
 
   function scrollToTop() {
     let top = CompatibleDocument.scrollTop();
     let height = CompatibleDocument.scrollTop();
-    top -= height / 7;
+    top -= height / 10;
     CompatibleDocument.scrollToTop(top <= 0 ? 0 : top);
     if (top > 0) {
       window.requestAnimationFrame(scrollToTop);
