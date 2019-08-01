@@ -58,7 +58,7 @@ class HomeStore {
       let response = yield  axios.get(`/articles/${sid}`);
       this.detail = response.data.new;
     } catch (error) {
-      onsole.log(error);
+      console.log(error);
     }
   })
 
