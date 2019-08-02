@@ -39,6 +39,10 @@ class MyApp extends App {
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
+    // ios设备下semantic一些点击事件无效
+    if ('ontouchstart' in document.documentElement && ['ipad', 'ipod', 'iphone'].indexOf(mobileStore.platform) > -1) {
+      document.body.style.cursor = 'pointer';
+    }
   }
 
   render() {
