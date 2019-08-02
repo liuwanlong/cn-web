@@ -24,23 +24,23 @@ export default function BackToTop(props) {
 
     return () => {
       window.removeEventListener('scroll', handleScrollDisplay);
-    }
+    };
   }, []);
 
   function handleScrollDisplay() {
-    let top = CompatibleDocument.scrollTop();
-    setDisplay(top >= 100)
+    let top = CompatibleDocument.getDocumentTop();
+    setDisplay(top >= 100);
   }
 
   function scrollToTop() {
-    let top = CompatibleDocument.scrollTop();
-    let height = CompatibleDocument.scrollTop();
+    let top = CompatibleDocument.getDocumentTop();
+    let height = CompatibleDocument.getDocumentTop();
     top -= height / 10;
     CompatibleDocument.scrollToTop(top <= 0 ? 0 : top);
     if (top > 0) {
       window.requestAnimationFrame(scrollToTop);
     } else {
-      props.finished && props.finished()
+      props.finished && props.finished();
     }
   }
 
@@ -50,5 +50,5 @@ export default function BackToTop(props) {
         <ArrowUp/>
       </Fab>
     </Zoom>
-  )
+  );
 }

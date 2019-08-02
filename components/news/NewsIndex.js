@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { inject, observer } from 'mobx-react'
+import { inject, observer } from 'mobx-react';
 import { withStyles } from '@material-ui/styles';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -57,7 +57,7 @@ class NewsIndex extends React.Component {
   handleScrollLoadMore = () => {
     const { homeStore } = this.props;
     if (!this.state.touchedBottom && !homeStore.isLoading &&
-      CompatibleDocument.scrollHeight() - CompatibleDocument.clientHeight() <= CompatibleDocument.scrollTop() + 50) {
+      CompatibleDocument.getDocumentTop() + CompatibleDocument.getWindowHeight() + 200 >= CompatibleDocument.getScrollHeight()) {
       this.setState({ touchedBottom: true });
       homeStore.fetchMoreNews(() => {
         this.setState({ touchedBottom: false });
@@ -105,7 +105,7 @@ class NewsIndex extends React.Component {
           <CircularProgress className={classes.progress}/>
         </Zoom>
       </div>
-    )
+    );
   }
 }
 
@@ -113,4 +113,4 @@ NewsIndex.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(NewsIndex)
+export default withStyles(styles)(NewsIndex);
