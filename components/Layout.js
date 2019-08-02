@@ -101,7 +101,7 @@ export default function Layout(props) {
           </ListItemIcon>
           <ListItemText>
             <Link color="inherit" href={'https://battleangel.online'} underline="none" target="_blank">
-              我的博客
+              我的网站
             </Link>
           </ListItemText>
         </ListItem>
