@@ -5,8 +5,9 @@ import { Provider } from 'mobx-react';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
-import initializeStore from "../stores"
+import initializeStore from "../stores";
 import Layout from "../components/Layout";
+import CompatibleDocument from "../lib/utils/CompatibleDocument";
 
 class MyApp extends App {
 
@@ -22,7 +23,7 @@ class MyApp extends App {
     return {
       ...appProps,
       initialMobxState: mobxStore
-    }
+    };
   }
 
   constructor(props) {
@@ -30,7 +31,7 @@ class MyApp extends App {
     const isServer = !process.browser;
     this.mobxStore = isServer
       ? props.initialMobxState
-      : initializeStore(props.initialMobxState)
+      : initializeStore(props.initialMobxState);
   }
 
   componentDidMount() {
@@ -39,8 +40,8 @@ class MyApp extends App {
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
-    // ios设备下semantic一些点击事件无效
-    if ('ontouchstart' in document.documentElement && ['ipad', 'ipod', 'iphone'].indexOf(mobileStore.platform) > -1) {
+    //ios设备下semantic一些点击事件无效;
+    if ('ontouchstart' in document.documentElement && ['ipad', 'ipod', 'iphone'].indexOf(CompatibleDocument.platform) > -1) {
       document.body.style.cursor = 'pointer';
     }
   }
