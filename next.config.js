@@ -4,9 +4,6 @@ module.exports = {
     return 'build-last';
   },
   webpack: function (config) {
-    config.optimization = {
-      minimize: false
-    };
     return config;
   }
 };
