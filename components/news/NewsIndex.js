@@ -12,10 +12,7 @@ import Grey from '@material-ui/core/colors/grey';
 import Zoom from '@material-ui/core/Zoom';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import CompatibleDocument from '../../lib/utils/CompatibleDocument';
-import Typography from "@material-ui/core/Typography";
-import Chip from "@material-ui/core/Chip";
 import BackToTop from "../common/BackToTop";
-import Box from "@material-ui/core/Box";
 
 
 const styles = theme => ({
@@ -90,7 +87,7 @@ class NewsIndex extends React.Component {
           {
             news.map(({ thumb, title, inputtime, sid, label }) =>
               <React.Fragment key={sid}>
-                <ListItem component={'a'} href={`/articles/${sid}`} className={classes.listItem}>
+                <ListItem button component={'a'} href={`/articles/${sid}`} className={classes.listItem}>
                   <ListItemAvatar>
                     <Avatar className={classes.listItemAvatar} src={`https://api.battleangel.online${thumb}`}/>
                     {/*<Avatar className={classes.listItemAvatar} src={`http://localhost:3001${thumb}`}/>*/}
