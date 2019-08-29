@@ -2,19 +2,30 @@ import React from 'react';
 import App, { Container } from 'next/app';
 import Head from 'next/head';
 import { Provider } from 'mobx-react';
-import { ThemeProvider } from '@material-ui/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from '../src/theme';
 import initializeStore from "../stores";
-import Layout from "../components/Layout";
 import CompatibleDocument from "../lib/utils/CompatibleDocument";
+import ThemeApp from "../components/ThemeApp";
+import { getCookie, getCookieFromStr } from "../lib/utils/cookies";
 
 class MyApp extends App {
 
   static async getInitialProps(appContext) {
     // Get or Create the store with `undefined` as initialState
     // This allows you to set a custom default initialState
-    const mobxStore = initializeStore();
+    let initializeStoreData = null;
+    const cookies = appContext.ctx.req.cookies;
+    if (cookies) {
+      const palette = getCookieFromStr('palette', cookies.split(';'));
+      if (palette && typeof palette === 'string') {
+        const paletteJSON = JSON.parse(palette);
+        initializeStoreData = {
+          themeStore: {
+            palette: paletteJSON
+          }
+        };
+      }
+    }
+    const mobxStore = initializeStoreData ? initializeStore(initializeStoreData) : initializeStore();
     // Provide the store to getInitialProps of pages
     appContext.ctx.mobxStore = mobxStore;
 
@@ -44,6 +55,8 @@ class MyApp extends App {
     if ('ontouchstart' in document.documentElement && ['ipad', 'ipod', 'iphone'].indexOf(CompatibleDocument.platform) > -1) {
       document.body.style.cursor = 'pointer';
     }
+
+    // this.mobxStore.themeStore.resetConfig(JSON.parse(getCookie('palette')));
   }
 
   render() {
@@ -52,14 +65,10 @@ class MyApp extends App {
       <Container>
         <Head>
           <title>Cnbeta新闻</title>
+          <meta name="theme-color" content={this.mobxStore.themeStore.theme.palette.primary.main}/>
         </Head>
         <Provider {...this.mobxStore}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline/>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ThemeProvider>
+          <ThemeApp Component={Component} pageProps={pageProps}/>
         </Provider>
       </Container>
     );

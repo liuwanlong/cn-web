@@ -28,12 +28,18 @@ app.prepare()
       }));
     }
 
+    server.use((req, res, next) => {
+      req.cookies = req.headers.cookie;
+      next();
+    });
+
     server.get('/articles/:sid', (req, res) => {
       let { sid } = req.params;
-      return app.render(req, res, '/news/detail', { sid })
+      return app.render(req, res, '/news/detail', { sid });
     });
 
     server.get('*', (req, res) => {
+      // console.log(req.headers['cookie']);
       const parsedUrl = parse(req.url, true);
       const rootStaticFiles = [];
       if (rootStaticFiles.indexOf(parsedUrl.pathname) > -1) {
@@ -48,5 +54,5 @@ app.prepare()
     server.listen(port, (err) => {
       if (err) throw err;
       console.log(`> Ready on http://localhost:${port}`);
-    })
+    });
   });
