@@ -49,7 +49,7 @@ class ThemeStore {
   saveConfig = () => {
     let originObject = toJS(this.palette);
     let paletteStr = JSON.stringify(originObject);
-    setCookie('palette', paletteStr, 365, '');
+    setCookie('palette', paletteStr, 365);
   };
 
   resetConfig = (palette) => {
