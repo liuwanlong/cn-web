@@ -9,7 +9,7 @@
     "@zeit/next-css": "^1.0.1",
     "axios": "^0.18.0",
     "clsx": "latest",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "http-proxy-middleware": "^0.19.1",
     "mobx": "^5.9.4",
     "mobx-react": "^5.4.3",
